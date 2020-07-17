@@ -29,7 +29,7 @@ func newConnection() database {
 }
 
 func CreateTable(conn *sql.DB) error {
-	query := `CREATE TABLE todo(id integer, title VARCHAR(200), description VARCHAR(200), createdAt timestamp);`
+	query := `CREATE TABLE IF NOT EXISTS todo(id integer, title VARCHAR(200), description VARCHAR(200), createdAt timestamp);`
 	_, err := conn.Exec(query)
 	if err != nil {
 		return err
