@@ -1,0 +1,28 @@
+version: '3'
+services:
+    app:
+        build: .
+        image: yulyulyharuka/golang:v1.0
+        command: ["go", "run", "main.go"]
+        volumes:
+            - main_data:/usr/src/app
+        depends_on:
+            - postgres
+        links: 
+            - postgres
+
+
+    postgres:
+        image: postgres:12.3-alpine
+        volumes:
+            - db_data:/var/lib/postgresql/data
+        ports:
+            - 5433:5432
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: password
+            POSTGRES_DB: db
+
+volumes: 
+    main_data: {}
+    db_data: {}
